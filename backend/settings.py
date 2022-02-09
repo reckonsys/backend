@@ -193,11 +193,11 @@ AWS_BUCKET_REGION = env("AWS_BUCKET_REGION", "us-east-1")
 
 # S3? or Minio?
 if env("USE_AWS_S3") is None:
-    # Use AWS S3
-    AWS_S3_ENDPOINT_URL = None
-else:
     # Use minio
     AWS_S3_ENDPOINT_URL = "http://0.0.0.0:9000"
+else:
+    # Use AWS S3
+    AWS_S3_ENDPOINT_URL = None
 
 UPLOADS_PREFIX = "uploads"
 
