@@ -15,7 +15,9 @@ CREATE ROLE my_username with encrypted password 'my_password';
 ALTER ROLE my_username WITH LOGIN;
 CREATE DATABASE my_db_name with owner my_username;
 ```
+# Custom management commands
 
+* `./manage.py choices_export` will update CHOICES.js and schema.graphql to the latest
 
 # Future Updates
 1. Django 4.0 Upgrade
