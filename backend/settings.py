@@ -10,7 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+
+def env(name, default=None):
+    return os.environ.get(name, default)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-t9lk(-elz9bvveaiu*t#e6n&ds#qmj-5ro#8uq4luix0eb9rsy"
+SECRET_KEY = env("SECRET_KEY", "not-so-secret")
+DEBUG = env("DJANGO_DEBUG", "0") == "1"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,11 +46,29 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+INSTALLED_APPS = [
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    # 3rd party apps
+    "django_extensions",
+    "graphene_django",
+    "corsheaders",
+    # 1st party apps
+    "backend.core",  # core app should NOT IMPORT any other app
+    # "backend.other"  # All other apps should go here
+    "backend.contrib",  # contrib app should NOT BE IMPORTED BY any other app
+]
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -73,20 +98,32 @@ WSGI_APPLICATION = "backend.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("DATABASE_NAME", default="my_db_name"),
+        "USER": env("DATABASE_USER", default="my_username"),
+        "PASSWORD": env("DATABASE_PASSWORD", default="my_password"),
+        "HOST": env("DATABASE_HOST", default="0.0.0.0"),
+        "PORT": env("DATABASE_PORT", default="5432"),
     }
 }
 
+if env("USE_SQLITE_DB") == "1":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",  # noqa: E501
     },
     {
         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
@@ -121,3 +158,49 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Custom Settings
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = ["GET", "POST", "OPTION"]
+AUTH_USER_MODEL = "core.User"
+CHOICES_JS = "CHOICES.js"
+
+GRAPHENE = {
+    "SCHEMA": "backend.graphql.schema",
+    "SCHEMA_OUTPUT": "schema.graphql",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+        "graphene_django.debug.DjangoDebugMiddleware",
+    ],
+}
+GRAPHQL_JWT = {
+    "JWT_VERIFY_EXPIRATION": False,
+    # uncomment below lines for enabling time-bound sessions
+    # 'JWT_EXPIRATION_DELTA': timedelta(minutes=60),
+    # 'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+}
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+AWS_EXPIRY = 604700
+AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID", "minioadmin")
+AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY", "minioadmin")
+AWS_BUCKET_NAME = env("AWS_BUCKET_NAME", "backend-local")
+AWS_REGION = env("AWS_REGION", default="us-east-1")
+AWS_BUCKET_REGION = env("AWS_BUCKET_REGION", "us-east-1")
+
+# S3? or Minio?
+if env("USE_AWS_S3") is None:
+    # Use AWS S3
+    AWS_S3_ENDPOINT_URL = None
+else:
+    # Use minio
+    AWS_S3_ENDPOINT_URL = "http://0.0.0.0:9000"
+
+UPLOADS_PREFIX = "uploads"
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+FRONTEND_PREFIX = env("FRONTEND_PREFIX", default="http://localhost:3000")

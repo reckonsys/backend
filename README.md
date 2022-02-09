@@ -8,3 +8,9 @@ A Django GraphQL (Graphene) base template
 * `poetry add <my-package>` to install mypackage from pypi
 * `poetry export -f requirements.txt  > requirements.txt` to update requirements.txt file before deploying a new feature
 * Make sure you run `pre-commit install` after the very first clone: https://pre-commit.com/
+
+
+# Future Updates
+1. Django 4.0 Upgrade
+2. Graphene 3 Upgrade (wait for django-graphene to support both Graphne 3 and Django 4)
+3. User management in keycloak
