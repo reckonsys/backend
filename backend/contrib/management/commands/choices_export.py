@@ -49,7 +49,7 @@ def export_choices():
                 _map = i[1]
                 _choices[_map.name] = _map.value
             choices[klass.__name__] = _choices
-    _write(settings.APP_CHOICES_JS, CHOICES_TEMPLATE, choices)
+    _write(settings.CHOICES_JS, CHOICES_TEMPLATE, choices)
 
 
 class Command(BaseCommand):

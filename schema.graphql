@@ -1,0 +1,138 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type ContentTypeType {
+  id: ID!
+  appLabel: String!
+  model: String!
+}
+
+input CreateUploadInput {
+  kind: Int!
+  name: String!
+  mimetype: String!
+  clientMutationId: String
+}
+
+type CreateUploadPayload {
+  upload: UploadType
+  clientMutationId: String
+}
+
+scalar DateTime
+
+type DjangoDebug {
+  sql: [DjangoDebugSQL]
+}
+
+type DjangoDebugSQL {
+  vendor: String!
+  alias: String!
+  sql: String
+  duration: Float!
+  rawSql: String!
+  params: String!
+  startTime: Float!
+  stopTime: Float!
+  isSlow: Boolean!
+  isSelect: Boolean!
+  transId: String
+  transStatus: String
+  isoLevel: String
+  encoding: String
+}
+
+input FinishUploadInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type FinishUploadPayload {
+  upload: UploadType
+  clientMutationId: String
+}
+
+scalar GenericScalar
+
+type Mutation {
+  createUpload(input: CreateUploadInput!): CreateUploadPayload
+  finishUpload(input: FinishUploadInput!): FinishUploadPayload
+  login(input: ObtainJSONWebTokenInput!): ObtainJSONWebTokenPayload
+  node(id: ID!): Node
+  register(input: RegisterInput!): RegisterPayload
+  updateMe(input: UpdateMeInput!): UpdateMePayload
+}
+
+interface Node {
+  id: ID!
+}
+
+input ObtainJSONWebTokenInput {
+  clientMutationId: String
+  username: String!
+  password: String!
+}
+
+type ObtainJSONWebTokenPayload {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  clientMutationId: String
+  token: String!
+}
+
+type Query {
+  node(id: ID!): Node
+  contentTypes: [ContentTypeType]
+  _debug: DjangoDebug
+  me: UserType
+  upload(id: ID!): UploadType
+  uploads: [UploadType]
+}
+
+input RegisterInput {
+  password: String!
+  username: String!
+  clientMutationId: String
+}
+
+type RegisterPayload {
+  user: UserType
+  clientMutationId: String
+}
+
+scalar UUID
+
+input UpdateMeInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  clientMutationId: String
+}
+
+type UpdateMePayload {
+  me: UserType
+  clientMutationId: String
+}
+
+type UploadType implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  errorMessage: String
+  filename: String!
+  kind: Int!
+  mimetype: String!
+  status: Int!
+  user: UserType!
+  presignedUrlGet: String
+  presignedUrlPut: String
+}
+
+type UserType {
+  username: String!
+  firstName: String!
+  lastName: String!
+  id: UUID!
+}
