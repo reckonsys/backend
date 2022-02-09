@@ -9,6 +9,13 @@ A Django GraphQL (Graphene) base template
 * `poetry export -f requirements.txt  > requirements.txt` to update requirements.txt file before deploying a new feature
 * Make sure you run `pre-commit install` after the very first clone: https://pre-commit.com/
 
+# SQL
+```sql
+CREATE ROLE my_username with encrypted password 'my_password';
+ALTER ROLE my_username WITH LOGIN;
+CREATE DATABASE my_db_name with owner my_username;
+```
+
 
 # Future Updates
 1. Django 4.0 Upgrade
