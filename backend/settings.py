@@ -167,7 +167,7 @@ CHOICES_JS = "../frontend/src/CHOICES.js"
 
 GRAPHENE = {
     "SCHEMA": "backend.graphql.schema",
-    "SCHEMA_OUTPUT": "schema.graphql",
+    "SCHEMA_OUTPUT": "../frontend/schema.graphql",
     "MIDDLEWARE": [
         "graphql_jwt.middleware.JSONWebTokenMiddleware",
         "graphene_django.debug.DjangoDebugMiddleware",
