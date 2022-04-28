@@ -163,7 +163,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = ["GET", "POST", "OPTION"]
 AUTH_USER_MODEL = "core.User"
-CHOICES_JS = "CHOICES.js"
+CHOICES_JS = "../frontend/src/CHOICES.js"
 
 GRAPHENE = {
     "SCHEMA": "backend.graphql.schema",
