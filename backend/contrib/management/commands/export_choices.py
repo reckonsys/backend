@@ -57,4 +57,3 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         export_choices()
-        management.call_command("graphql_schema")
