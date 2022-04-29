@@ -1,7 +1,35 @@
-from graphql_jwt.decorators import login_required, user_passes_test
+from functools import wraps
 
-from .choices import UserKind
+import jwt
+from django.conf import settings
 
-login_required = login_required  # Silence Flake8
-client_required = user_passes_test(lambda u: u.kind == UserKind.CLIENT)
-admin_required = user_passes_test(lambda u: u.kind == UserKind.ADMIN)
+from .models import User
+
+
+def login_required(f):
+    @wraps(f)
+    def wrapper(root, info, *args, **kwargs):
+        # try:
+        auth_header = info.context.META.get("HTTP_AUTHORIZATION")
+        token = auth_header.split(" ")[1]
+        token_json = jwt.decode(
+            token,
+            settings.KEYCLOAK_PUBLIC_KEY,
+            algorithms=["RS256"],
+            audience="account",
+        )
+        try:
+            user = User.objects.get(id=token_json["sub"])
+        except User.DoesNotExist:
+            user = User.objects.create(
+                email=token_json["email"],
+                id=token_json["sub"],
+                first_name=token_json["given_name"],
+                last_name=token_json["family_name"],
+            )
+        info.context.user = user
+        # except ExpiredSignatureError:
+        return f(root, info, *args, **kwargs)
+        # return None
+
+    return wrapper

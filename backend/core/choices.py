@@ -2,11 +2,6 @@ from django.db.models import IntegerChoices
 from django.utils.translation import gettext_lazy as _
 
 
-class UserKind(IntegerChoices):
-    ADMIN = 1, _("Admin")
-    CLIENT = 2, _("Client")
-
-
 class UploadKind(IntegerChoices):
     PROFILE_PICTURE = 1, _("Profile Picture")
     EXCEL_REPORT = 2, _("Excel Report")

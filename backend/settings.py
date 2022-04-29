@@ -162,7 +162,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Custom Settings
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_METHODS = ["GET", "POST", "OPTION"]
-AUTH_USER_MODEL = "core.User"
 CHOICES_JS = "../frontend/src/CHOICES.js"
 
 GRAPHENE = {

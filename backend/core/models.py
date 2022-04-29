@@ -1,13 +1,11 @@
-import hmac
 from uuid import uuid4
 
 from django.conf import settings
-from django.contrib.auth.models import AbstractUser
 from django.db.models import CASCADE, CharField, DateTimeField, ForeignKey, Model
 from django.db.models import PositiveSmallIntegerField as PSIF
 from django.db.models import TextField, UUIDField
 
-from .choices import UploadKind, UploadStatus, UserKind
+from .choices import UploadKind, UploadStatus
 from .storage import generate_presigned_url_get, generate_presigned_url_put
 
 
@@ -29,23 +27,13 @@ class BaseModel(Model):
         return f"{self.id}"
 
 
-class User(AbstractUser, BaseModel):
-    kind = PSIF(choices=UserKind.choices, default=UserKind.CLIENT)
-
-    def get_verify_token(self):
-        result = hmac.new(
-            settings.SECRET_KEY.encode("utf-8"), msg=str(self.id).encode("utf-8")
-        )
-        return result.hexdigest()
-
-    def get_verification_link(self):
-        return f"{settings.FRONTEND_PREFIX}/auth/verify/{self.id}/{self.get_verify_token()}"  # noqa: E501
-
-    def validate_verify_token(self, digest):
-        return hmac.compare_digest(digest, self.get_verify_token())
+class User(BaseModel):
+    email = CharField(max_length=250)
+    first_name = CharField(max_length=250)
+    last_name = CharField(max_length=250)
 
     def __str__(self):
-        return f"{self.username}"
+        return f"{self.email} [{self.id}]"
 
 
 class Upload(BaseModel):
