@@ -168,18 +168,10 @@ GRAPHENE = {
     "SCHEMA": "backend.graphql.schema",
     "SCHEMA_OUTPUT": "../frontend/schema.graphql",
     "MIDDLEWARE": [
-        "graphql_jwt.middleware.JSONWebTokenMiddleware",
         "graphene_django.debug.DjangoDebugMiddleware",
     ],
 }
-GRAPHQL_JWT = {
-    "JWT_VERIFY_EXPIRATION": False,
-    # uncomment below lines for enabling time-bound sessions
-    # 'JWT_EXPIRATION_DELTA': timedelta(minutes=60),
-    # 'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
-}
 AUTHENTICATION_BACKENDS = [
-    "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
 
@@ -203,3 +195,11 @@ UPLOADS_PREFIX = "uploads"
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 FRONTEND_PREFIX = env("FRONTEND_PREFIX", default="http://localhost:3000")
+
+KEYCLOAK_PUBLIC_KEY = env(
+    "KEYCLOAK_PUBLIC_KEY",
+    "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4SvPRqJJA5O//iTg8/+BiCOZB2c0lK8TQ8plfem3md+OFhNC0d21Uzq8PGOSP/BrU/xeqg0DHvlzcriOTC0Zwc+AzEoo+eR+jpeP0isIjUNHz1+sRRVPt69b/+HM331IGkuqTs4qk76ExTD4IMZ3nv0GHsKHZCOanRTSbqQTMaDaW3casXkFQyOYhyEbBu3atFZ+vWtMUkgFJ9wgHSOhWdJkX2JxzR65y/BgiJUtocn7YprKLxEKjHk4b+gLGPE017O81ooInbgH2XcZjxsG/S3Rpw4TSOh/6mpBCYb1YTYT3GzpVCoQ5K1zhe4GgZWLHpPgkKoOVvO7m3+FPXHvWwIDAQAB",  # noqa:E501
+)
+KEYCLOAK_PUBLIC_KEY = f"""-----BEGIN PUBLIC KEY-----
+{KEYCLOAK_PUBLIC_KEY}
+-----END PUBLIC KEY-----"""
