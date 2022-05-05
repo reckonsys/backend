@@ -1,7 +1,6 @@
 from celery import current_app
 from graphene import Field
 from graphene.relay import ClientIDMutation
-from graphql_jwt.relay import ObtainJSONWebToken
 
 from .choices import UploadStatus
 from .decorators import login_required
@@ -39,5 +38,4 @@ class FinishUpload(ClientIDMutation):
 class Mutations:
     create_upload = CreateUpload.Field()
     finish_upload = FinishUpload.Field()
-    login = ObtainJSONWebToken.Field()
     node = Node.Field()
