@@ -1,6 +1,14 @@
 # backend
 A Django GraphQL (Graphene) base template
 
+# Development setup
+
+1. Make sure you have `poetry` installed. We manage dependencies with it.
+2. `poetry shell` inside backebd repo.
+3. `poetry install` to update yours deps
+4. `python manage.py migrate` to update your DB
+5. `python manage.py runserver` to start the server.
+
 * Make sure your IDE/Editor has [Black](https://black.readthedocs.io/en/stable/editor_integration.html) and [EditorConfig](https://editorconfig.org/#pre-installed) plugins installed; and configure it lint file automatically when you edit/save.
 * We use [Python Poetry](https://python-poetry.org) to manage depedencies
 * `poetry install` will install all required depedencies
