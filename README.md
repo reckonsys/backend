@@ -1,6 +1,10 @@
 # backend
 A Django GraphQL (Graphene) base template
 
+# Prerequsites
+
+Refere to services sarted in [tmuxp.yaml](tmuxp.yaml)
+
 # Development setup
 
 1. Make sure you have `poetry` installed. We manage dependencies with it.

@@ -1,0 +1,41 @@
+session_name: 'reck-tmplt'
+
+windows:
+
+- window_name: support
+  layout: tiled
+  panes:
+  - postgres -D /home/linuxbrew/.linuxbrew/var/postgres
+  - rabbitmq-server
+  - minio server ~/data/minio
+  - MailHog
+  - cd ~/projects/keycloak/keycloak-18.0.0 && bin/kc.sh start-dev --spi-theme-static-max-age=-1 --spi-theme-cache-themes=false --spi-theme-cache-templates=false
+
+- window_name: services
+  layout: tiled
+  start_directory: ~/projects/reckonsys
+  panes:
+  - cd backend && poetry run ./manage.py runserver
+  - cd backend && poetry run celery -A backend worker -l debug
+  - cd frontend && y relay
+  - cd frontend && y start
+
+- window_name: backend
+  start_directory: ~/projects/reckonsys/backend
+  panes:
+  - poetry shell
+
+- window_name: frontend
+  start_directory: ~/projects/reckonsys/frontend
+  panes:
+  - ls
+
+- window_name: socket
+  start_directory: ~/projects/reckonsys/socket
+  panes:
+  - ls
+
+- window_name: bigga
+  start_directory: ~/projects/reckonsys/bigga
+  panes:
+  - ls
