@@ -1,6 +1,11 @@
 # backend
 A Django GraphQL (Graphene) base template
 
+# Help?
+
+Please ask your  questions in our #pythonista slack channel [and tag @dhilipsiva in the thread later]
+
+
 # Prerequsites
 
 * Refere to services sarted in [tmuxp.yaml](tmuxp.yaml)
