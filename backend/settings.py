@@ -44,21 +44,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-]
-
-INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
     # 3rd party apps
     "django_extensions",
     "graphene_django",
     "corsheaders",
     # 1st party apps
     "backend.core",  # core app should NOT IMPORT any other app
+    "backend.questions",
     # "backend.other"  # All other apps should go here
     "backend.contrib",  # contrib app should NOT BE IMPORTED BY any other app
 ]
