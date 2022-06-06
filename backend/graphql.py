@@ -3,8 +3,8 @@ from graphene import ObjectType, Schema
 from .core.mutations import Mutations as CoreMutations
 from .core.queries import Queries as CoreQueries
 
-from .questions.mutations import Mutations as BackendMutations
-from .questions.queries import Queries as BackendQueries
+from .questions.mutations import Mutations as QuestionsMutations
+from .questions.queries import Queries as QUestionsQueries
 
 # from .other.mutations import Mutations as OtherMutations
 # from .other.queries import Queries as OtherQueries
@@ -12,7 +12,7 @@ from .questions.queries import Queries as BackendQueries
 
 class Query(
     CoreQueries,
-    BackendQueries,
+    QuestionsQueries,
     # OtherQueries,
     # lastly,
     ObjectType,
@@ -22,7 +22,7 @@ class Query(
 
 class Mutation(
     CoreMutations,
-    BackendMutations,
+    QuestionsMutations,
     # OtherMutations,
     # lastly,
     ObjectType,
