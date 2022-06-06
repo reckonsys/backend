@@ -35,7 +35,3 @@ CREATE DATABASE my_db_name with owner my_username;
 
 
 * `./manage.py choices_export` will update CHOICES.js and schema.graphql to the latest
-
-# Future Updates
-1. Django 4.0 Upgrade
-2. Graphene 3 Upgrade (wait for django-graphene to support both Graphne 3 and Django 4)
