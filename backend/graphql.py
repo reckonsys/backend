@@ -4,7 +4,7 @@ from .core.mutations import Mutations as CoreMutations
 from .core.queries import Queries as CoreQueries
 
 from .questions.mutations import Mutations as QuestionsMutations
-from .questions.queries import Queries as QUestionsQueries
+from .questions.queries import Queries as QuestionsQueries
 
 # from .other.mutations import Mutations as OtherMutations
 # from .other.queries import Queries as OtherQueries
