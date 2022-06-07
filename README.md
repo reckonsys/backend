@@ -14,6 +14,7 @@ Please ask your  questions in our #pythonista slack channel [and tag @dhilipsiva
 CREATE ROLE my_username with encrypted password 'my_password';
 ALTER ROLE my_username WITH LOGIN;
 CREATE DATABASE my_db_name with owner my_username;
+GRANT ALL PRIVILEGES ON DATABASE "my_db_name" to my_username;
 ```
 
 # Development setup
