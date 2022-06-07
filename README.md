@@ -11,10 +11,8 @@ Please ask your  questions in our #pythonista slack channel [and tag @dhilipsiva
 * Refere to services sarted in [tmuxp.yaml](tmuxp.yaml)
 * Create Postgres DB, USER: default creds can be found in `DATABASES` setting in [settings.py](https://github.com/reckonsys/backend/blob/develop/backend/settings.py) file
 ```sql
-CREATE ROLE my_username with encrypted password 'my_password';
-ALTER ROLE my_username WITH LOGIN;
+CREATE ROLE my_username with encrypted password 'my_password' LOGIN SUPERUSER;
 CREATE DATABASE my_db_name with owner my_username;
-GRANT ALL PRIVILEGES ON DATABASE "my_db_name" to my_username;
 ```
 
 # Development setup
