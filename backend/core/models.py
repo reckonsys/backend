@@ -1,9 +1,16 @@
 from uuid import uuid4
 
 from django.conf import settings
-from django.db.models import CASCADE, CharField, DateTimeField, ForeignKey, Model
-from django.db.models import PositiveSmallIntegerField as PSIF
-from django.db.models import TextField, UUIDField
+from django.db.models import (
+    PROTECT,
+    CharField,
+    DateTimeField,
+    ForeignKey,
+    Model,
+    PositiveSmallIntegerField,
+    TextField,
+    UUIDField,
+)
 
 from .choices import UploadKind, UploadStatus
 from .storage import generate_presigned_url_get, generate_presigned_url_put
@@ -39,10 +46,10 @@ class User(BaseModel):
 class Upload(BaseModel):
     error_message = TextField(null=True, blank=True)
     filename = CharField(max_length=250)
-    kind = PSIF(choices=UploadKind.choices, default=UploadKind.PROFILE_PICTURE)
+    kind = PositiveSmallIntegerField(choices=UploadKind.choices, default=UploadKind.PROFILE_PICTURE)
     mimetype = CharField(max_length=100)
-    status = PSIF(choices=UploadStatus.choices, default=UploadStatus.UPLOADING)
-    user = ForeignKey(User, on_delete=CASCADE, related_name="uploads")
+    status = PositiveSmallIntegerField(choices=UploadStatus.choices, default=UploadStatus.UPLOADING)
+    user = ForeignKey(User, on_delete=PROTECT, related_name="uploads")
 
     @property
     def key(self):
