@@ -1,9 +1,9 @@
-from graphene import ID, Field, List, Int
+from graphene import ID, Field, Int, List
 
 from backend.core.decorators import login_required
 from backend.core.node import Node
 
-from .models import Question, Comment
+from .models import Comment, Question
 from .types import CommentType, QuestionType
 
 

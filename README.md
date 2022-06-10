@@ -23,6 +23,8 @@ CREATE DATABASE my_db_name with owner my_username;
 4. `python manage.py migrate` to update your DB
 5. `python manage.py runserver` to start the server.
 
+# Docs
+
 * Make sure your IDE/Editor has [Black](https://black.readthedocs.io/en/stable/editor_integration.html) and [EditorConfig](https://editorconfig.org/#pre-installed) plugins installed; and configure it lint file automatically when you edit/save.
 * We use [Python Poetry](https://python-poetry.org) to manage depedencies
 * `poetry install` will install all required depedencies
@@ -30,7 +32,4 @@ CREATE DATABASE my_db_name with owner my_username;
 * `poetry add <my-package>` to install mypackage from pypi
 * `poetry export -f requirements.txt  > requirements.txt` to update requirements.txt file before deploying a new feature
 * Make sure you run `pre-commit install` after the very first clone: https://pre-commit.com/
-
-
-
 * `./manage.py choices_export` will update CHOICES.js and schema.graphql to the latest

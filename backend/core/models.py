@@ -46,9 +46,13 @@ class User(BaseModel):
 class Upload(BaseModel):
     error_message = TextField(null=True, blank=True)
     filename = CharField(max_length=250)
-    kind = PositiveSmallIntegerField(choices=UploadKind.choices, default=UploadKind.PROFILE_PICTURE)
+    kind = PositiveSmallIntegerField(
+        choices=UploadKind.choices, default=UploadKind.PROFILE_PICTURE
+    )
     mimetype = CharField(max_length=100)
-    status = PositiveSmallIntegerField(choices=UploadStatus.choices, default=UploadStatus.UPLOADING)
+    status = PositiveSmallIntegerField(
+        choices=UploadStatus.choices, default=UploadStatus.UPLOADING
+    )
     user = ForeignKey(User, on_delete=PROTECT, related_name="uploads")
 
     @property

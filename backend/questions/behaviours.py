@@ -1,4 +1,4 @@
-from django.db.models import Case, Count, F, IntegerField, When, QuerySet
+from django.db.models import Case, Count, F, IntegerField, QuerySet, When
 from graphene import Int
 
 from .choices import VoteKind

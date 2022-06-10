@@ -2,7 +2,6 @@ from graphene import ObjectType, Schema
 
 from .core.mutations import Mutations as CoreMutations
 from .core.queries import Queries as CoreQueries
-
 from .questions.mutations import Mutations as QuestionsMutations
 from .questions.queries import Queries as QuestionsQueries
 

@@ -1,18 +1,13 @@
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.db.models import (
-    CASCADE,
-    CharField,
-    ForeignKey,
-    PositiveSmallIntegerField as PSIF,
-    TextField,
-    UUIDField,
-)
+from django.db.models import CASCADE, CharField, ForeignKey
+from django.db.models import PositiveSmallIntegerField as PSIF
+from django.db.models import TextField, UUIDField
 
 from backend.core.models import BaseModel, User
 
+from .behaviours import CommentableQuerySet, VotableQuerySet
 from .choices import VoteKind
-from .behaviours import VotableQuerySet, CommentableQuerySet
 
 
 class Vote(BaseModel):
