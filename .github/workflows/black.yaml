@@ -1,10 +1,11 @@
-name: Lint
-
+name: Black
 on: [push, pull_request]
-
 jobs:
   lint:
     runs-on: ubuntu-latest
+    env:
+      OS: ubuntu-latest
+      PYTHON: '3.10'
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
