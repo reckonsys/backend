@@ -13,9 +13,27 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 from pathlib import Path
 
+import sentry_sdk
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.django import DjangoIntegration
 
 def env(name, default=None):
     return os.environ.get(name, default)
+
+SENTRY_DSN = env(
+    "SENTRY_DSN",
+    "https://examplePublicKey@o0.ingest.sentry.io/0",
+)
+
+sentry_sdk.init(
+    dsn=SENTRY_DSN,
+    integrations=[DjangoIntegration(), CeleryIntegration()],
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production,
+    traces_sample_rate=1.0,
+    send_default_pii=False,
+)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
