@@ -18,6 +18,7 @@ cryptography = "^37.0.2"
 PyJWT = "^2.3.0"
 pyproject-flake8 = "^0.0.1-alpha.4"
 redis = "^4.3.3"
+sentry-sdk = "^1.6.0"
 
 [tool.poetry.dev-dependencies]
 neovim = "^0.3.1"
