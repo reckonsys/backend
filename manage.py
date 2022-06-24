@@ -3,10 +3,23 @@
 import os
 import sys
 
+import uptrace
+from opentelemetry.instrumentation.django import DjangoInstrumentor
+from opentelemetry.instrumentation.logging import LoggingInstrumentor
+
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
+    from django.conf import settings
+
+    uptrace.configure_opentelemetry(
+        dsn=settings.UPTRACE_DSN,
+        service_name="backend",
+        service_version="v0.1.0",
+    )
+    LoggingInstrumentor().instrument(set_logging_format=True)
+    DjangoInstrumentor().instrument()
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

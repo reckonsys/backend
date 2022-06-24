@@ -19,6 +19,10 @@ PyJWT = "^2.3.0"
 pyproject-flake8 = "^0.0.1-alpha.4"
 redis = "^4.3.3"
 sentry-sdk = "^1.6.0"
+opentelemetry-sdk = "^1.11.1"
+opentelemetry-instrumentation-django = "0.30b1"
+uptrace = "^1.11.1"
+opentelemetry-instrumentation-logging = "0.30b1"
 
 [tool.poetry.dev-dependencies]
 neovim = "^0.3.1"

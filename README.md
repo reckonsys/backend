@@ -23,6 +23,9 @@ CREATE DATABASE my_db_name with owner my_username;
 3. `poetry install` to update yours deps
 4. `python manage.py migrate` to update your DB
 5. `python manage.py runserver` to start the server.
+6. `cp sample.env .env` to create a .env file and edit the Keys/Secrets/DSN as required.
+
+This setup uses `sentry.io` and `uptrace.dev` services. Hence you should update the DSN in .env as required.
 
 # Docs
 

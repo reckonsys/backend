@@ -217,3 +217,8 @@ KEYCLOAK_PUBLIC_KEY = f"""-----BEGIN PUBLIC KEY-----
 -----END PUBLIC KEY-----"""
 
 CELERY_BROKER_URL = env("CELERY_BROKER_URL", "redis://localhost:6379/0")
+
+UPTRACE_DSN = env(
+    "UPTRACE_DSN",
+    "https://exampleKey@uptrace.dev/0",
+)
