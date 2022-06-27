@@ -222,3 +222,11 @@ UPTRACE_DSN = env(
     "UPTRACE_DSN",
     "https://exampleKey@uptrace.dev/0",
 )
+
+EMAIL_HOST = env("EMAIL_HOST", "0.0.0.0")
+EMAIL_PORT = int(env("EMAIL_PORT", "1025"))
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", "MailHog")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", "MailHog")
+EMAIL_USE_TLS = env("EMAIL_USE_TLS", "0") == "1"
+EMAIL_USE_SSL = env("EMAIL_USE_SSL", "0") == "1"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
