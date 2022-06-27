@@ -9,6 +9,7 @@ Please ask your  questions in our #pythonista slack channel [and tag @dhilipsiva
 
 # Prerequsites
 
+* [https://github.com/reckonsys/wiki](https://github.com/reckonsys/wiki)
 * Refere to services sarted in [tmuxp.yaml](tmuxp.yaml)
 * Create Postgres DB, USER: default creds can be found in `DATABASES` setting in [settings.py](https://github.com/reckonsys/backend/blob/develop/backend/settings.py) file
 ```sql
